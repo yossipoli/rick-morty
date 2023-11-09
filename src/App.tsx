@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react'
+import './App.css'
+import Table from './components/table'
+import * as API from './DAL/Api'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [characters, setCharacters] = useState([])
+	useEffect(() => {
+		;(async () => {
+			setCharacters(await API.getCharacters())
+		})()
+	}, [])
+	return (
+		<div className='App'>
+			<header className='App-header'>
+				<Table rows={characters} />
+			</header>
+		</div>
+	)
 }
 
-export default App;
+export default App
