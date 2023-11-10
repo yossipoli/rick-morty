@@ -18,7 +18,7 @@ const Paging: FC<PaginationProps> = ({
 		handleQueryParamsChange(newQueryParams)
 	}
 	return (
-		<div>
+		<div className='paging'>
 			<Pagination
 				count={+count}
 				page={+(currentQueryParams.page || '1')}

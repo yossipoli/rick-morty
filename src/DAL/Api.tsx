@@ -6,6 +6,7 @@ export type QueryParams = {
 	page?: string
 	name?: string
 	status?: string
+	gender?: string
 }
 
 export type CharactersResponse = {

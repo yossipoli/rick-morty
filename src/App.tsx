@@ -37,13 +37,15 @@ function App() {
 	}
 
 	return (
-		<div>
-			<main className='main'>
+		<div className='main'>
+			<h1>Rick & Morty Characters</h1>
+			<header className='header'>
 				<Search
 					currentQueryParams={currentPageParams}
 					handleSearch={handleQueryParamsChange}
 				/>
-
+			</header>
+			<main>
 				{pagesCount === '0' ? (
 					<h3>Not Found</h3>
 				) : (

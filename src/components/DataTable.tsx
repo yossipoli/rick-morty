@@ -9,25 +9,27 @@ type TableProps = {
 
 const Table: FC<TableProps> = ({ characters, onSelectCharacter }) => {
 	return (
-		<table>
-			<thead>
-				<th>Image</th>
-				<th>Character Name</th>
-				<th>Origin</th>
-				<th>Status</th>
-				<th>Species</th>
-				<th>Gender</th>
-			</thead>
-			<tbody>
-				{characters.map((character) => (
-					<Row
-						key={character.id}
-						character={character}
-						onClick={onSelectCharacter}
-					/>
-				))}
-			</tbody>
-		</table>
+		<div className='table-container'>
+			<table>
+				<thead>
+					<th>Image</th>
+					<th>Character Name</th>
+					<th>Origin</th>
+					<th>Status</th>
+					<th>Species</th>
+					<th>Gender</th>
+				</thead>
+				<tbody>
+					{characters.map((character) => (
+						<Row
+							key={character.id}
+							character={character}
+							onClick={onSelectCharacter}
+						/>
+					))}
+				</tbody>
+			</table>
+		</div>
 	)
 }
 

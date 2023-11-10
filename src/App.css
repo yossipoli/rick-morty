@@ -24,6 +24,18 @@
 }
 
 .paging {
+  display: flex;
   color: aliceblue;
+  margin: 10px auto;
 }
 
+.clear-button {
+  display: flex;
+  margin: 10px auto;
+}
+
+.table-container {
+  display: flex;
+  margin: 10px;
+  width: 100%;
+}
