@@ -1,32 +1,50 @@
+import { Character } from '../types/character'
+
 const api = 'https://rickandmortyapi.com/api/'
 
-export const getCharacters = async (
-	page?: number,
-	name?: string,
+export type QueryParams = {
+	page?: string
+	name?: string
 	status?: string
-) => {
-	const characters = await fetch(`${api}/character?page=${page}`).then(
-		(response) => response.json()
-	)
-	console.log(characters.info.pages)
-
-	return {
-		characterList: characters.results,
-		pages: characters.info.pages,
-	}
 }
 
-//          ?page=1&name=rick&status=alive`
+export type CharactersResponse = {
+	info: {
+		count: string
+		pages: string
+		next?: string
+		prev?: string
+	}
+	results: Character[]
+}
+
+export const getCharacters = async (
+	queryParams: QueryParams
+): Promise<CharactersResponse> => {
+	const urlSearchParams = new URLSearchParams(queryParams).toString()
+
+	const response = await fetch(`${api}/character?${urlSearchParams}`)
+	const data = await response.json()
+	console.log({ data })
+	if (data.error) {
+		return {
+			results: [],
+			info: {
+				count: '0',
+				pages: '0',
+			},
+		}
+	}
+	return data
+}
 
 export const getAppearanceEpisodes = async (episodeLinks: string[]) => {
-	const firstAppearanceData = await fetch(episodeLinks[0]).then((response) =>
-		response.json()
-	)
+	const responseFirst = await fetch(episodeLinks[0])
+	const firstAppearanceData = await responseFirst.json()
 	const firstAppearance = firstAppearanceData.episode
 
-	const lastAppearanceData = await fetch(
-		episodeLinks[episodeLinks.length - 1]
-	).then((response) => response.json())
+	const responseLast = await fetch(episodeLinks[episodeLinks.length - 1])
+	const lastAppearanceData = await responseLast.json()
 	const lastAppearance = lastAppearanceData.episode
 
 	return { firstAppearance, lastAppearance }

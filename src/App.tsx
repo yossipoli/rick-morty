@@ -6,18 +6,21 @@ import { Character } from './types/character'
 import { Box, Modal } from '@mui/material'
 import MediaCard from './components/MediaCard'
 import Paging from './components/Paging'
+import Search from './components/Search'
 
 function App() {
-	const [characters, setCharacters] = useState([])
+	const [characters, setCharacters] = useState<Character[]>([])
 	const [selectedCharacter, setSelectedCharacter] = useState<Character>()
-	const [currentPage, setCurrentPage] = useState(1)
-	const [pagesCount, setPagesCount] = useState(1)
+	const [currentPageParams, setCurrentPageParams] = useState<API.QueryParams>(
+		{}
+	)
+	const [pagesCount, setPagesCount] = useState<string>('1')
 
 	useEffect(() => {
 		;(async () => {
-			const { characterList, pages } = await API.getCharacters()
-			setPagesCount(pages)
-			setCharacters(characterList)
+			const { results, info } = await API.getCharacters({})
+			setPagesCount(info.pages)
+			setCharacters(results)
 		})()
 	}, [])
 
@@ -26,26 +29,37 @@ function App() {
 	}
 	const unselectCharacter = () => setSelectedCharacter(undefined)
 
-	const handlePageChange = async (newPage: number) => {
-		const { characterList, pages } = await API.getCharacters(newPage)
-		setPagesCount(pages)
-		setCharacters(characterList)
-		setCurrentPage(newPage)
+	const handleQueryParamsChange = async (queryParams: API.QueryParams) => {
+		const { results, info } = await API.getCharacters(queryParams)
+		setPagesCount(info.pages)
+		setCharacters(results)
+		setCurrentPageParams(queryParams)
 	}
 
 	return (
 		<div>
-			<header className='main'>
-				<Table
-					characters={characters}
-					onSelectCharacter={selectCharacter}
+			<main className='main'>
+				<Search
+					currentQueryParams={currentPageParams}
+					handleSearch={handleQueryParamsChange}
 				/>
 
-				<Paging
-					count={pagesCount}
-					page={currentPage}
-					handlePageChange={handlePageChange}
-				/>
+				{pagesCount === '0' ? (
+					<h3>Not Found</h3>
+				) : (
+					<>
+						<Table
+							characters={characters}
+							onSelectCharacter={selectCharacter}
+						/>
+
+						<Paging
+							count={pagesCount}
+							currentQueryParams={currentPageParams}
+							handleQueryParamsChange={handleQueryParamsChange}
+						/>
+					</>
+				)}
 
 				<Modal
 					open={!!selectedCharacter}
@@ -59,7 +73,7 @@ function App() {
 						) : null}
 					</Box>
 				</Modal>
-			</header>
+			</main>
 		</div>
 	)
 }
