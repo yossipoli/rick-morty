@@ -5,10 +5,15 @@ export const getCharacters = async (
 	name?: string,
 	status?: string
 ) => {
-	const characters = await fetch(`${api}/character`).then((response) =>
-		response.json()
+	const characters = await fetch(`${api}/character?page=${page}`).then(
+		(response) => response.json()
 	)
-	return characters.results
+	console.log(characters.info.pages)
+
+	return {
+		characterList: characters.results,
+		pages: characters.info.pages,
+	}
 }
 
 //          ?page=1&name=rick&status=alive`

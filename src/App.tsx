@@ -5,26 +5,19 @@ import * as API from './DAL/Api'
 import { Character } from './types/character'
 import { Box, Modal } from '@mui/material'
 import MediaCard from './components/MediaCard'
-
-const style = {
-	// 	position: 'absolute' as 'absolute',
-	// 	top: '50%',
-	// 	left: '50%',
-	// 	transform: 'translate(-50%, -50%)',
-	// 	width: 400,
-	// 	bgcolor: 'background.paper',
-	// 	border: '2px solid #000',
-	// 	boxShadow: 24,
-	// 	p: 4,
-}
+import Paging from './components/Paging'
 
 function App() {
 	const [characters, setCharacters] = useState([])
 	const [selectedCharacter, setSelectedCharacter] = useState<Character>()
+	const [currentPage, setCurrentPage] = useState(1)
+	const [pagesCount, setPagesCount] = useState(1)
 
 	useEffect(() => {
 		;(async () => {
-			setCharacters(await API.getCharacters())
+			const { characterList, pages } = await API.getCharacters()
+			setPagesCount(pages)
+			setCharacters(characterList)
 		})()
 	}, [])
 
@@ -33,19 +26,34 @@ function App() {
 	}
 	const unselectCharacter = () => setSelectedCharacter(undefined)
 
+	const handlePageChange = async (newPage: number) => {
+		const { characterList, pages } = await API.getCharacters(newPage)
+		setPagesCount(pages)
+		setCharacters(characterList)
+		setCurrentPage(newPage)
+	}
+
 	return (
-		<div className='App'>
-			<header className='App-header'>
+		<div>
+			<header className='main'>
 				<Table
 					characters={characters}
 					onSelectCharacter={selectCharacter}
 				/>
+
+				<Paging
+					count={pagesCount}
+					page={currentPage}
+					handlePageChange={handlePageChange}
+				/>
+
 				<Modal
 					open={!!selectedCharacter}
 					onClose={unselectCharacter}
 					aria-labelledby='modal-modal-title'
-					aria-describedby='modal-modal-description'>
-					<Box sx={style}>
+					aria-describedby='modal-modal-description'
+					className='media-card'>
+					<Box className='media-card'>
 						{selectedCharacter ? (
 							<MediaCard character={selectedCharacter} />
 						) : null}
