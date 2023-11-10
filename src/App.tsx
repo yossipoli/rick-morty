@@ -1,7 +1,6 @@
-
 import { useEffect, useState } from 'react'
 import './App.css'
-import Table from './components/Table'
+import Table from './components/DataTable'
 import * as API from './DAL/Api'
 import { Character } from './types/character'
 import { Box, Modal } from '@mui/material'
@@ -80,4 +79,3 @@ function App() {
 }
 
 export default App
-

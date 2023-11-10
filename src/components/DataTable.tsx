@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import { Character } from '../types/character'
-import Row from './Row'
+import Row from './DataRow'
 
 type TableProps = {
 	characters: Character[]
