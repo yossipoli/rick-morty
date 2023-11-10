@@ -1,26 +1,16 @@
 import type { FC } from 'react'
 import Avatar from '@mui/material/Avatar'
+import { Character } from '../types/character'
 
-export type rowProps = {
-	id: number
-	image: string
-	name: string
-	origin: { name: string; url: string }
-	status: string
-	species: string
-	gender: string
+type RowProps = {
+	character: Character
+	onClick: (character: Character) => void
 }
 
-const Row: FC<rowProps> = ({
-	image,
-	name,
-	origin,
-	status,
-	species,
-	gender,
-}) => {
+const Row: FC<RowProps> = ({ character, onClick }) => {
+	const { name, image, origin, status, species, gender } = character
 	return (
-		<tr>
+		<tr onClick={() => onClick(character)}>
 			<td>
 				<Avatar
 					alt={name}

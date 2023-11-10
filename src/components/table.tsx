@@ -1,11 +1,13 @@
 import type { FC } from 'react'
-import Row, { rowProps } from './row'
+import { Character } from '../types/character'
+import Row from './Row'
 
-type tableProps = {
-	rows: rowProps[]
+type TableProps = {
+	characters: Character[]
+	onSelectCharacter: (character: Character) => void
 }
 
-const Table: FC<tableProps> = ({ rows }) => {
+const Table: FC<TableProps> = ({ characters, onSelectCharacter }) => {
 	return (
 		<table>
 			<thead>
@@ -17,10 +19,11 @@ const Table: FC<tableProps> = ({ rows }) => {
 				<th>Gender</th>
 			</thead>
 			<tbody>
-				{rows.map((row) => (
+				{characters.map((character) => (
 					<Row
-						key={row.id}
-						{...row}
+						key={character.id}
+						character={character}
+						onClick={onSelectCharacter}
 					/>
 				))}
 			</tbody>
