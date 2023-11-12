@@ -50,7 +50,6 @@ const App = () => {
 							alt='Rick and Morty Logo'
 						/>
 					</div>
-					T
 				</div>
 				<header className='header'>
 					<Search
