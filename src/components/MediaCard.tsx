@@ -30,7 +30,6 @@ const MediaCard: FC<MediaCardProps> = ({ character }) => {
 			<CardActionArea>
 				<CardMedia
 					component='img'
-					// height='140'
 					image={character.image}
 					alt={character.name}
 				/>
@@ -44,8 +43,9 @@ const MediaCard: FC<MediaCardProps> = ({ character }) => {
 					<Typography
 						variant='body2'
 						color='text.secondary'>
-						First Appearance: {episodes.first} <tr />
-						First Appearance: {episodes.last}
+						First Appearance: {episodes.first}
+						<tr />
+						Last Appearance: {episodes.last}
 					</Typography>
 				</CardContent>
 			</CardActionArea>

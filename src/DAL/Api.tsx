@@ -1,28 +1,13 @@
-import { Character } from '../types/character'
+import { CharactersResponse, QueryParams } from '../types/character'
 
 const api = 'https://rickandmortyapi.com/api/'
-
-export type QueryParams = {
-	page?: string
-	name?: string
-	status?: string
-	gender?: string
-}
-
-export type CharactersResponse = {
-	info: {
-		count: string
-		pages: string
-		next?: string
-		prev?: string
-	}
-	results: Character[]
-}
 
 export const getCharacters = async (
 	queryParams: QueryParams
 ): Promise<CharactersResponse> => {
-	const urlSearchParams = new URLSearchParams(queryParams).toString()
+	const urlSearchParams = new URLSearchParams(
+		queryParams as Record<string, any>
+	).toString()
 
 	const response = await fetch(`${api}/character?${urlSearchParams}`)
 	const data = await response.json()
@@ -30,8 +15,8 @@ export const getCharacters = async (
 		return {
 			results: [],
 			info: {
-				count: '0',
-				pages: '0',
+				count: 0,
+				pages: 0,
 			},
 		}
 	}

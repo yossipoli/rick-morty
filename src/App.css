@@ -1,41 +1,79 @@
 .App {
   text-align: center;
+  padding: 20px 10px 10px 10px;
 }
 
+.loader {
+  display: flex;
+  width: 20%;
+  margin: auto;
+}
+
+.spinner {
+  animation: spin 10s linear infinite;
+}
+
+.loader img {
+  width: 100%;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.logo {
+  display: flex;
+  margin: auto;
+  width: 30%;
+}
+
+.logo img {
+  width: 100%;
+}
+
+.header {
+  width: 90%;
+  margin: auto;
+}
+
+.header div {
+  width: 100%;
+}
+
+.search-box {
+  width: fit-content;
+  margin: auto;
+}
+
+.filters {
+  display: flex;
+  margin: 20px 0 0 0;
+}
+
+.filters button {
+  width: 30%;
+}
 
 .main {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
-
 
 .media-card {
   display: flex;
-  background-color: 'background.paper';
-  border: '2px solid #000';
-  box-shadow: 24;
+  border: 2px solid #000;
   margin: auto;
 }
 
 .paging {
-  display: flex;
-  color: aliceblue;
-  margin: 10px auto;
-}
-
-.clear-button {
-  display: flex;
-  margin: 10px auto;
-}
-
-.table-container {
-  display: flex;
   margin: 10px;
-  width: 100%;
 }

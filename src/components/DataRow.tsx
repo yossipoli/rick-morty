@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import Avatar from '@mui/material/Avatar'
 import { Character } from '../types/character'
+import { TableCell, TableRow } from '@mui/material'
 
 type RowProps = {
 	character: Character
@@ -10,19 +11,19 @@ type RowProps = {
 const Row: FC<RowProps> = ({ character, onClick }) => {
 	const { name, image, origin, status, species, gender } = character
 	return (
-		<tr onClick={() => onClick(character)}>
-			<td>
+		<TableRow onClick={() => onClick(character)}>
+			<TableCell>
 				<Avatar
 					alt={name}
 					src={image}
 				/>
-			</td>
-			<td>{name}</td>
-			<td>{origin.name}</td>
-			<td>{status}</td>
-			<td>{species}</td>
-			<td>{gender}</td>
-		</tr>
+			</TableCell>
+			<TableCell>{name}</TableCell>
+			<TableCell>{origin.name}</TableCell>
+			<TableCell>{status}</TableCell>
+			<TableCell>{species}</TableCell>
+			<TableCell>{gender}</TableCell>
+		</TableRow>
 	)
 }
 

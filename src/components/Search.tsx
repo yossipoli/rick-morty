@@ -1,7 +1,10 @@
-import { FC, useEffect } from 'react'
-import { QueryParams } from '../DAL/Api'
-import { Button } from '@mui/base'
+import { FC, useEffect, useState } from 'react'
 import { useDebounce } from 'use-debounce'
+import { QueryParams } from '../types/character'
+import BasicSelect from './Select'
+import { Button, TextField } from '@mui/material'
+import DeleteIcon from '@mui/icons-material/Delete'
+import SearchIcon from '@mui/icons-material/Search'
 
 type SearchProps = {
 	currentQueryParams: QueryParams
@@ -9,56 +12,86 @@ type SearchProps = {
 }
 
 const Search: FC<SearchProps> = ({ currentQueryParams, handleSearch }) => {
-	const [debouncedSearchValue, setDebouncedSearchValue] = useDebounce('', 1500)
+	const { status, gender, name } = currentQueryParams
+	const [searchValue, setSearchValue] = useState<string>(name ?? '')
+	const [debouncedSearchValue, setDebouncedSearchValue] = useDebounce(
+		name ?? '',
+		300
+	)
+
+	useEffect(() => {
+		setDebouncedSearchValue(searchValue)
+	}, [searchValue])
 
 	useEffect(() => {
 		onChange('name', debouncedSearchValue)
 	}, [debouncedSearchValue])
 
-	const onChange = (name: keyof QueryParams, value: string) => {
+	const onChange = (key: keyof QueryParams, value: string) => {
 		const newQueryParams: QueryParams = {
 			...currentQueryParams,
-			[name]: value,
-			page: '1',
+			[key]: value,
+			page: 1,
 		}
 		handleSearch(newQueryParams)
 	}
 
 	const handleClear = () => {
+		setSearchValue('')
 		handleSearch({})
 	}
 
 	return (
-		<div className='searchContainer'>
-			<div className='searchBox'>
-				<input
+		<div className='search-container'>
+			<div className='search-box'>
+				<TextField
+					label='Search'
+					variant='outlined'
 					name='name'
 					type='search'
-					onChange={(e) => setDebouncedSearchValue(e.target.value)}
+					placeholder='Search'
+					value={searchValue}
+					onChange={(e) => setSearchValue(e.target.value)}
+					InputProps={{
+						endAdornment: <SearchIcon style={{ color: 'grey' }} />,
+					}}
 				/>
 			</div>
 			<div className='filters'>
-				<select onChange={(e) => onChange('gender', e.target.value)}>
-					<option value=''>Gender</option>
-					<option value='female'>Female</option>
-					<option value='male'>Male</option>
-					<option value='genderless'>Genderless</option>
-					<option value='unknown'>Unknown</option>
-				</select>
+				<BasicSelect
+					id='gender'
+					label='Gender'
+					value={gender ?? ''}
+					options={[
+						{ value: 'female', label: 'Female' },
+						{ value: 'male', label: 'Male' },
+						{ value: 'genderless', label: 'Genderless' },
+						{ value: 'unknown', label: 'Unknown' },
+					]}
+					onChange={onChange}
+				/>
 
-				<select onChange={(e) => onChange('status', e.target.value)}>
-					<option value=''>Status</option>
-					<option value='alive'>Alive</option>
-					<option value='dead'>Dead</option>
-					<option value='unknown'>Unknown</option>
-				</select>
+				<BasicSelect
+					id='status'
+					label='Status'
+					value={status ?? ''}
+					options={[
+						{ value: 'alive', label: 'Alive' },
+						{ value: 'dead', label: 'Dead' },
+						{ value: 'unknown', label: 'Unknown' },
+					]}
+					onChange={onChange}
+				/>
+
+				<Button
+					className='clear-button'
+					variant='contained'
+					color='error'
+					startIcon={<DeleteIcon />}
+					onClick={handleClear}>
+					Clear All
+				</Button>
 			</div>
-
-			<Button
-				className='clear-button'
-				onClick={handleClear}>
-				Clear All
-			</Button>
 		</div>
 	)
 }

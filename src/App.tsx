@@ -2,19 +2,18 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Table from './components/DataTable'
 import * as API from './DAL/Api'
-import { Character } from './types/character'
-import { Box, Modal } from '@mui/material'
+import { Character, QueryParams } from './types/character'
+import { Box, Modal, ThemeProvider, Typography } from '@mui/material'
 import MediaCard from './components/MediaCard'
-import Paging from './components/Paging'
+import PageController from './components/PageController'
 import Search from './components/Search'
+import Loader from './components/Loader'
 
-function App() {
+const App = () => {
 	const [characters, setCharacters] = useState<Character[]>([])
 	const [selectedCharacter, setSelectedCharacter] = useState<Character>()
-	const [currentPageParams, setCurrentPageParams] = useState<API.QueryParams>(
-		{}
-	)
-	const [pagesCount, setPagesCount] = useState<string>('1')
+	const [currentParams, setCurrentParams] = useState<QueryParams>({})
+	const [pagesCount, setPagesCount] = useState<number>(1)
 
 	useEffect(() => {
 		;(async () => {
@@ -29,24 +28,33 @@ function App() {
 	}
 	const unselectCharacter = () => setSelectedCharacter(undefined)
 
-	const handleQueryParamsChange = async (queryParams: API.QueryParams) => {
+	const handleQueryParamsChange = async (queryParams: QueryParams) => {
 		const { results, info } = await API.getCharacters(queryParams)
 		setPagesCount(info.pages)
 		setCharacters(results)
-		setCurrentPageParams(queryParams)
 	}
 
+	useEffect(() => {
+		handleQueryParamsChange(currentParams)
+	}, [JSON.stringify(currentParams)])
+
 	return (
-		<div className='main'>
-			<h1>Rick & Morty Characters</h1>
+		<div className='App'>
+			<Loader />
+			<div className='logo'>
+				<img
+					src='./../rick_and_morty_logo.png'
+					alt='Rick and Morty Logo'
+				/>
+			</div>
 			<header className='header'>
 				<Search
-					currentQueryParams={currentPageParams}
-					handleSearch={handleQueryParamsChange}
+					currentQueryParams={currentParams}
+					handleSearch={setCurrentParams}
 				/>
 			</header>
-			<main>
-				{pagesCount === '0' ? (
+			<main className='main'>
+				{pagesCount === 0 ? (
 					<h3>Not Found</h3>
 				) : (
 					<>
@@ -55,10 +63,10 @@ function App() {
 							onSelectCharacter={selectCharacter}
 						/>
 
-						<Paging
+						<PageController
 							count={pagesCount}
-							currentQueryParams={currentPageParams}
-							handleQueryParamsChange={handleQueryParamsChange}
+							currentQueryParams={currentParams}
+							handleQueryParamsChange={setCurrentParams}
 						/>
 					</>
 				)}
