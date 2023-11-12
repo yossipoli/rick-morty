@@ -85,8 +85,8 @@ const Search: FC<SearchProps> = ({ currentQueryParams, handleSearch }) => {
 
 				<Button
 					className='clear-button'
-					variant='contained'
-					color='error'
+					variant='outlined'
+					color='primary'
 					startIcon={<DeleteIcon />}
 					onClick={handleClear}>
 					Clear All
