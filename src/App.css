@@ -5,7 +5,7 @@
   position: relative;
   text-align: center;
   justify-content: center;
-  background-image: linear-gradient(to right top, #051937, #002f4f, #004455, #005744, #0b6722);
+  /* background-image: linear-gradient(to right top, #051937, #002f4f, #004455, #005744, #0b6722); */
   font-size: calc(10px + 2vmin);
   margin-bottom: 0;
 }
@@ -49,7 +49,7 @@
 }
 
 .header {
-  width: 90%;
+  width: 84%;
   margin: auto;
 }
 
@@ -58,7 +58,7 @@
 }
 
 h3 {
-  color: whitesmoke;
+  color: black;
 }
 
 .search-box {
@@ -84,12 +84,12 @@ h3 {
 }
 
 .main tr:nth-child(odd) {
-  background-color: #051937;
+  background-color: #d0eab8;
 }
 
 .media-card {
   display: flex;
-  border: 2px solid white;
+  border: 2px solid black;
   margin: auto;
 }
 

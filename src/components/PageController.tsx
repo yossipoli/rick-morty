@@ -22,7 +22,7 @@ const PageController: FC<PaginationProps> = ({
 			<Pagination
 				count={count}
 				page={currentQueryParams.page || 1}
-				color='primary'
+				color='standard'
 				className='paging'
 				onChange={handleChange}
 			/>
