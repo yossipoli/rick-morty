@@ -1,6 +1,8 @@
 const Loader = () => {
 	return (
-		<div className='loader'>
+		<div
+			className='loader'
+			style={{ margin: '15px' }}>
 			<img
 				src='./rick-and-morty-loader.png'
 				alt='Rick and Morty Loader'

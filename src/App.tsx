@@ -43,60 +43,54 @@ const App = () => {
 	return (
 		<div className='App'>
 			<ThemeProvider theme={darkTheme}>
-				<div className='background'>
-					{/* </div> */}
-					<div className='background-layer'>
-						{/* </div> */}
-						<div className='title'>
-							<div className='logo'>
-								<img
-									src='./../rick_and_morty_logo.png'
-									alt='Rick and Morty Logo'
-								/>
-							</div>
-							T
-						</div>
-						<header className='header'>
-							<Search
-								currentQueryParams={currentParams}
-								handleSearch={setCurrentParams}
-							/>
-						</header>
-						<main className='main'>
-							{pagesCount === 0 ? (
-								<h3>Not Found</h3>
-							) : characters.length ? (
-								<>
-									<Table
-										characters={characters}
-										onSelectCharacter={selectCharacter}
-									/>
-
-									<PageController
-										count={pagesCount}
-										currentQueryParams={currentParams}
-										handleQueryParamsChange={setCurrentParams}
-									/>
-								</>
-							) : (
-								<Loader />
-							)}
-
-							<Modal
-								open={!!selectedCharacter}
-								onClose={unselectCharacter}
-								aria-labelledby='modal-modal-title'
-								aria-describedby='modal-modal-description'
-								className='media-card'>
-								<Box className='media-card'>
-									{selectedCharacter ? (
-										<MediaCard character={selectedCharacter} />
-									) : null}
-								</Box>
-							</Modal>
-						</main>
+				<div className='title'>
+					<div className='logo'>
+						<img
+							src='./../rick_and_morty_logo.png'
+							alt='Rick and Morty Logo'
+						/>
 					</div>
+					T
 				</div>
+				<header className='header'>
+					<Search
+						currentQueryParams={currentParams}
+						handleSearch={setCurrentParams}
+					/>
+				</header>
+				<main className='main'>
+					{pagesCount === 0 ? (
+						<h3>Not Found</h3>
+					) : characters.length ? (
+						<>
+							<Table
+								characters={characters}
+								onSelectCharacter={selectCharacter}
+							/>
+
+							<PageController
+								count={pagesCount}
+								currentQueryParams={currentParams}
+								handleQueryParamsChange={setCurrentParams}
+							/>
+						</>
+					) : (
+						<Loader />
+					)}
+
+					<Modal
+						open={!!selectedCharacter}
+						onClose={unselectCharacter}
+						aria-labelledby='modal-modal-title'
+						aria-describedby='modal-modal-description'
+						className='media-card'>
+						<Box className='media-card'>
+							{selectedCharacter ? (
+								<MediaCard character={selectedCharacter} />
+							) : null}
+						</Box>
+					</Modal>
+				</main>
 			</ThemeProvider>
 		</div>
 	)
