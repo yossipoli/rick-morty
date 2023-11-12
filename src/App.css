@@ -5,7 +5,7 @@
   position: relative;
   text-align: center;
   justify-content: center;
-  background-color: black;
+  background-image: linear-gradient(to right top, #051937, #002f4f, #004455, #005744, #0b6722);
   font-size: calc(10px + 2vmin);
   margin-bottom: 0;
 }
@@ -68,7 +68,7 @@ h3 {
 
 .filters {
   display: flex;
-  margin: 20px 0 0 0;
+  margin: 20px 0 20px 0;
 }
 
 .filters button {
@@ -80,6 +80,11 @@ h3 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 100px;
+}
+
+.main tr:nth-child(odd) {
+  background-color: #051937;
 }
 
 .media-card {
@@ -88,6 +93,21 @@ h3 {
   margin: auto;
 }
 
-.paging {
+.page-controller {
   margin: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .filters {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .filters button {
+    margin: 20px auto 10px auto;
+  }
+
+  .main {
+    padding: 0;
+  }
 }
