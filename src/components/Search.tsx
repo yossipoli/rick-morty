@@ -27,7 +27,10 @@ const Search: FC<SearchProps> = ({ currentQueryParams, handleSearch }) => {
 		onChange('name', debouncedSearchValue)
 	}, [debouncedSearchValue])
 
-	const onChange = (key: keyof QueryParams, value: string) => {
+	const onChange = (
+		key: keyof QueryParams,
+		value: QueryParams['name' | 'gender' | 'status']
+	) => {
 		const newQueryParams: QueryParams = {
 			...currentQueryParams,
 			[key]: value,
@@ -51,9 +54,11 @@ const Search: FC<SearchProps> = ({ currentQueryParams, handleSearch }) => {
 					type='search'
 					placeholder='Search'
 					value={searchValue}
+					color='success'
+					style={{ color: 'green' }}
 					onChange={(e) => setSearchValue(e.target.value)}
 					InputProps={{
-						endAdornment: <SearchIcon style={{ color: 'grey' }} />,
+						endAdornment: <SearchIcon style={{ color: 'green' }} />,
 					}}
 				/>
 			</div>

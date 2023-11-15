@@ -1,3 +1,7 @@
+body {
+  background-image: linear-gradient(to right bottom, #d0eab8, white);
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -5,7 +9,6 @@
   position: relative;
   text-align: center;
   justify-content: center;
-  /* background-image: linear-gradient(to right top, #051937, #002f4f, #004455, #005744, #0b6722); */
   font-size: calc(10px + 2vmin);
   margin-bottom: 0;
 }
@@ -42,6 +45,7 @@
   display: flex;
   margin: auto;
   width: 30%;
+  min-width: 200px;
 }
 
 .logo img {
@@ -101,6 +105,10 @@ h3 {
   .filters {
     flex-direction: column;
     justify-content: center;
+  }
+
+  .filters :first-child {
+    margin-bottom: 5px;
   }
 
   .filters button {

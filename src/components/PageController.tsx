@@ -13,7 +13,10 @@ const PageController: FC<PaginationProps> = ({
 	count,
 	handleQueryParamsChange,
 }) => {
-	const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+	const handleChange = (
+		event: React.ChangeEvent<unknown>,
+		value: QueryParams['page']
+	) => {
 		const newQueryParams = { ...currentQueryParams, page: value }
 		handleQueryParamsChange(newQueryParams)
 	}
@@ -23,7 +26,7 @@ const PageController: FC<PaginationProps> = ({
 				count={count}
 				page={currentQueryParams.page || 1}
 				color='standard'
-				className='paging'
+				className='page-controller'
 				onChange={handleChange}
 			/>
 		</div>
