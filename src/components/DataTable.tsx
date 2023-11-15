@@ -21,24 +21,24 @@ const Table: FC<TableProps> = ({ characters, onSelectCharacter }) => {
 			<TableComp
 				stickyHeader
 				aria-label='sticky table'>
-				<TableHead>
+				<TableHead className='table-head'>
 					<TableRow>
-						<TableCell>
+						<TableCell style={{ color: 'white', backgroundColor: 'green' }}>
 							<strong>Image</strong>
 						</TableCell>
-						<TableCell>
+						<TableCell style={{ color: 'white', backgroundColor: 'green' }}>
 							<strong>Character Name</strong>
 						</TableCell>
-						<TableCell>
+						<TableCell style={{ color: 'white', backgroundColor: 'green' }}>
 							<strong>Origin</strong>
 						</TableCell>
-						<TableCell>
+						<TableCell style={{ color: 'white', backgroundColor: 'green' }}>
 							<strong>Status</strong>
 						</TableCell>
-						<TableCell>
+						<TableCell style={{ color: 'white', backgroundColor: 'green' }}>
 							<strong>Species</strong>
 						</TableCell>
-						<TableCell>
+						<TableCell style={{ color: 'white', backgroundColor: 'green' }}>
 							<strong>Gender</strong>
 						</TableCell>
 					</TableRow>

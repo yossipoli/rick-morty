@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import Table from './components/DataTable'
 import * as API from './DAL/Api'
-import { Character, QueryParams } from './types/character'
+import { Character, CharactersResponse, QueryParams } from './types/character'
 import { ThemeProvider } from '@mui/material/styles'
 import { Box, Modal } from '@mui/material'
 import MediaCard from './components/MediaCard'
@@ -12,16 +12,13 @@ import Loader from './components/Loader'
 import darkTheme from './theme'
 
 const App = () => {
-	const [characters, setCharacters] = useState<Character[]>([])
+	const [charactersData, setCharactersData] = useState<CharactersResponse>()
 	const [selectedCharacter, setSelectedCharacter] = useState<Character>()
 	const [currentParams, setCurrentParams] = useState<QueryParams>({})
-	const [pagesCount, setPagesCount] = useState<number>(1)
 
 	useEffect(() => {
 		;(async () => {
-			const { results, info } = await API.getCharacters({})
-			setPagesCount(info.pages)
-			setCharacters(results)
+			setCharactersData(await API.getCharacters({}))
 		})()
 	}, [])
 
@@ -31,9 +28,7 @@ const App = () => {
 	const unselectCharacter = () => setSelectedCharacter(undefined)
 
 	const handleQueryParamsChange = async (queryParams: QueryParams) => {
-		const { results, info } = await API.getCharacters(queryParams)
-		setPagesCount(info.pages)
-		setCharacters(results)
+		setCharactersData(await API.getCharacters(queryParams))
 	}
 
 	useEffect(() => {
@@ -58,19 +53,21 @@ const App = () => {
 					/>
 				</header>
 				<main className='main'>
-					{pagesCount === 0 ? (
+					{charactersData?.info.pages === 0 ? (
 						<h3>Not Found</h3>
-					) : characters.length ? (
+					) : charactersData?.results.length ? (
 						<>
 							<Table
-								characters={characters}
+								characters={charactersData.results}
 								onSelectCharacter={selectCharacter}
 							/>
 
 							<PageController
-								count={pagesCount}
+								count={charactersData.info.pages}
 								currentQueryParams={currentParams}
-								handleQueryParamsChange={setCurrentParams}
+								handleQueryParamsChange={(newPageParam) =>
+									setCurrentParams(newPageParam)
+								}
 							/>
 						</>
 					) : (

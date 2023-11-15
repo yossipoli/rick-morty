@@ -28,11 +28,17 @@ const BasicSelect: FC<BasicSelectProps> = ({
 	return (
 		<Box sx={{ minWidth: 120 }}>
 			<FormControl fullWidth>
-				<InputLabel id={id}>{label}</InputLabel>
+				<InputLabel
+					id={id}
+					style={{ color: 'green' }}>
+					{label}
+				</InputLabel>
 				<Select
 					labelId={id}
 					label={label}
 					value={value}
+					style={{ color: 'green' }}
+					color='success'
 					onChange={handleChange}>
 					{options.map((option) => (
 						<MenuItem
