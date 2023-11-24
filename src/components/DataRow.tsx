@@ -11,7 +11,9 @@ type RowProps = {
 const Row: FC<RowProps> = ({ character, onClick }) => {
 	const { name, image, origin, status, species, gender } = character
 	return (
-		<TableRow onClick={() => onClick(character)}>
+		<TableRow
+			onClick={() => onClick(character)}
+			style={{ cursor: 'pointer' }}>
 			<TableCell>
 				<Avatar
 					alt={name}

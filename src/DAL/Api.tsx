@@ -1,6 +1,7 @@
+import { ApiResponse, Episode, Result } from '../types/api'
 import { CharactersResponse, QueryParams } from '../types/character'
 
-const api = 'https://rickandmortyapi.com/api/'
+const api = 'https://rickandmortyapi.com/api'
 
 export const getCharacters = async (
 	queryParams: QueryParams
@@ -33,4 +34,27 @@ export const getAppearanceEpisodes = async (episodeLinks: string[]) => {
 	const lastAppearance = lastAppearanceData.episode
 
 	return { firstAppearance, lastAppearance }
+}
+
+export const getEpisodesCharacters = async (
+	url: string = `${api}/episode`
+): Promise<Result[]> => {
+	const episodeData: Result[] = []
+	const response = await fetch(url)
+	const data: ApiResponse = await response.json()
+
+	for (const episode of data.results) {
+		episodeData.push({
+			id: episode.id,
+			episode: episode.episode,
+			charactersAmount: episode.characters.length,
+		})
+	}
+
+	if (data.info.next) {
+		const nextPageData = await getEpisodesCharacters(data.info.next)
+		episodeData.push(...nextPageData)
+	}
+
+	return episodeData
 }

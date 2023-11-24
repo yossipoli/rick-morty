@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Table from './components/DataTable'
 import * as API from './DAL/Api'
 import { Character, CharactersResponse, QueryParams } from './types/character'
 import { ThemeProvider } from '@mui/material/styles'
-import { Box, Modal } from '@mui/material'
+import { Box, Modal, Container } from '@mui/material'
+import Table from './components/DataTable'
 import MediaCard from './components/MediaCard'
 import PageController from './components/PageController'
 import Search from './components/Search'
 import Loader from './components/Loader'
 import darkTheme from './theme'
+import ViewCard from './components/ViewCard'
+import ViewToggle, { View } from './components/ViewToggle'
 
 const App = () => {
 	const [charactersData, setCharactersData] = useState<CharactersResponse>()
 	const [selectedCharacter, setSelectedCharacter] = useState<Character>()
 	const [currentParams, setCurrentParams] = useState<QueryParams>({})
+	const [view, setView] = useState<View>('table')
 
 	useEffect(() => {
 		;(async () => {
@@ -57,11 +60,35 @@ const App = () => {
 						<h3>Not Found</h3>
 					) : charactersData?.results.length ? (
 						<>
-							<Table
-								characters={charactersData.results}
-								onSelectCharacter={selectCharacter}
-							/>
-
+							<Box style={{ color: 'green' }}>
+								View:
+								<ViewToggle
+									view={view}
+									setView={(nextView: View) => setView(nextView)}
+								/>
+							</Box>
+							{view === 'table' ? (
+								<Table
+									characters={charactersData.results}
+									onSelectCharacter={selectCharacter}
+								/>
+							) : (
+								<Container
+									maxWidth='lg'
+									style={{
+										display: 'flex',
+										flexWrap: 'wrap',
+										justifyContent: 'center',
+									}}>
+									{charactersData.results.map((character) => (
+										<ViewCard
+											key={character.id}
+											character={character}
+											onSelect={(character) => selectCharacter(character)}
+										/>
+									))}
+								</Container>
+							)}
 							<PageController
 								count={charactersData.info.pages}
 								currentQueryParams={currentParams}
