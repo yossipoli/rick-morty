@@ -1,15 +1,26 @@
-
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-// import Stack from '@mui/material/Stack'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import CharactersChart from './components/Chart'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
 	<React.StrictMode>
-		<App />
+		<BrowserRouter>
+			<Routes>
+				<Route
+					path='/'
+					element={<App />}
+				/>
+				<Route
+					path='/chart'
+					element={<CharactersChart />}
+				/>
+			</Routes>
+		</BrowserRouter>
 	</React.StrictMode>
 )
 
@@ -18,4 +29,3 @@ root.render(
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 
 reportWebVitals()
-

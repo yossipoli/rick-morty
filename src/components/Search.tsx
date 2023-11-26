@@ -58,7 +58,7 @@ const Search: FC<SearchProps> = ({ currentQueryParams, handleSearch }) => {
 					style={{ color: 'green' }}
 					onChange={(e) => setSearchValue(e.target.value)}
 					InputProps={{
-						endAdornment: <SearchIcon style={{ color: 'green' }} />,
+						endAdornment: <SearchIcon color='success' />,
 					}}
 				/>
 			</div>
