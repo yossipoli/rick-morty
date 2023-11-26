@@ -1,5 +1,4 @@
 import {
-	Box,
 	Card,
 	CardActionArea,
 	CardContent,
@@ -32,12 +31,8 @@ const ViewCard: FC<ViewCardProps> = ({ character, onSelect }) => {
 						component='div'>
 						{character.name}
 					</Typography>
-					<Typography
-						variant='body2'
-						color='text.secondary'>
-						<Box>Status: {character.status}</Box>
-						<Box>Species: {character.species}</Box>
-					</Typography>
+					<Typography>Status: {character.status}</Typography>
+					<Typography>Species: {character.species}</Typography>
 				</CardContent>
 			</CardActionArea>
 		</Card>

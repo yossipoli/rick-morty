@@ -11,7 +11,7 @@ export type ApiResponse = {
 	}
 }
 
-export type Result = {
+export type EpisodeCharacters = {
 	id: number
 	episode: string
 	charactersAmount: number
