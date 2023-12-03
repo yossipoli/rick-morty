@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import { EpisodeCharacters } from '../types/api'
 import { BarChart, XAxis, YAxis, Bar, Tooltip, CartesianGrid } from 'recharts'
-import { getEpisodesCharacters } from './../DAL/Api'
+import { getEpisodesCharacters } from '../DAL/Api'
 import { Container } from '@mui/material'
-import Loader from './Loader'
+import Loader from '../components/Loader'
 
 const CharactersChart = () => {
 	const [data, setData] = useState<EpisodeCharacters[]>([])
