@@ -20,12 +20,6 @@ const CharactersChart = () => {
 				display: 'flex',
 				flexDirection: 'column',
 			}}>
-			<div className='logo'>
-				<img
-					src='./../rick_and_morty_logo.png'
-					alt='Rick and Morty Logo'
-				/>
-			</div>
 			<h2 style={{ color: 'green' }}>Characters amount per episode:</h2>
 			{!data.length ? (
 				<Loader />

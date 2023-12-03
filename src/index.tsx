@@ -5,22 +5,28 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import CharactersChart from './components/Chart'
+import Header from './components/Header'
+import { ThemeProvider } from '@mui/material/styles'
+import theme from './theme'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<Routes>
-				<Route
-					path='/'
-					element={<App />}
-				/>
-				<Route
-					path='/chart'
-					element={<CharactersChart />}
-				/>
-			</Routes>
-		</BrowserRouter>
+		<ThemeProvider theme={theme}>
+			<BrowserRouter>
+				<Header />
+				<Routes>
+					<Route
+						path='/'
+						element={<App />}
+					/>
+					<Route
+						path='/chart'
+						element={<CharactersChart />}
+					/>
+				</Routes>
+			</BrowserRouter>
+		</ThemeProvider>
 	</React.StrictMode>
 )
 

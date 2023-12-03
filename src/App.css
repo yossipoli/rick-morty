@@ -13,10 +13,6 @@ body {
   margin-bottom: 0;
 }
 
-.title {
-  display: flex;
-}
-
 .loader {
   display: flex;
   width: 20%;
@@ -43,7 +39,7 @@ body {
 
 .logo {
   display: flex;
-  margin: auto;
+  margin: 30px auto auto auto;
   width: 30%;
   min-width: 200px;
 }
@@ -118,4 +114,10 @@ h3 {
   .main {
     padding: 0;
   }
+}
+
+.header-component a {
+  color: whitesmoke;
+  text-decoration: none;
+  font-weight: bolder;
 }
