@@ -48,22 +48,3 @@ The list of characters will be taken from https://rickandmortyapi.com/
 * <b>The search, sorting and filteing functionality should be done using the api and not localy!</b>
 * <b>The wireframe (gifs and images examples) is just a guideline, be creative with your design.</b>
 * <b>Don't waste your time on the bonus features if the core features aren't working.</b> Get the app working with the core features. The bonus tasks are optional.
-
-## Demo:
-![Alt Text](https://gist.github.com/jacobra19/db3bb6efbda25b8eff4b73337eb72d69/raw/dc389b243db62dc1901ff36f3f24d3f0bbb87051/demo-rm.gif)
-
-### Pagination
-![Alt Text](https://gist.github.com/jacobra19/db3bb6efbda25b8eff4b73337eb72d69/raw/665716f8bb1b9acb91dc55cb49cde240d85353fd/pagination.gif)
-
-### Search and Filter
-![Alt Text](https://gist.github.com/jacobra19/db3bb6efbda25b8eff4b73337eb72d69/raw/665716f8bb1b9acb91dc55cb49cde240d85353fd/filterandsearch.gif)
-
-### Dialog
-![Alt Text](https://gist.github.com/jacobra19/db3bb6efbda25b8eff4b73337eb72d69/raw/665716f8bb1b9acb91dc55cb49cde240d85353fd/modal.gif)
-
-
-### Bonus view toggle
-![Alt Text](https://gist.github.com/jacobra19/db3bb6efbda25b8eff4b73337eb72d69/raw/665716f8bb1b9acb91dc55cb49cde240d85353fd/views-toggle.gif)
-
-### Bonus Chart example
-![Alt Text](https://gist.github.com/jacobra19/db3bb6efbda25b8eff4b73337eb72d69/raw/dc389b243db62dc1901ff36f3f24d3f0bbb87051/chart.png)
